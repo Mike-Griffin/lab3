@@ -8,6 +8,7 @@ $(document).ready(function() {
 /*
  * Function that is called when the document is ready.
  */
+ var counter = 0;
 function initializePage() {
 	$("#testjs").click(function(e) {
 		$('.jumbotron h1').text("Javascript is connected");
@@ -39,16 +40,24 @@ function projectClick(e) {
 	var projectTitle = $(this).find("p").text();
 	console.log("PROJECT TITLE: " + projectTitle);
 	var jumbotronHeader = $(".jumbotron h1");
-	console.log("JUMBOTRONHEADER: " + jumbotronHeader.length);
+	console.log("JUMBOTRONHEADER: " + jumbotronHeader.text);
 	jumbotronHeader.text(projectTitle);
 
 	var containingProject = $(this).closest(".project");
 	var description = $(containingProject).find(".project-description");
-	if(description.length == 0) {
-	$(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
+	if(counter == 0) {
+	$(containingProject).append("<div class='project-description'><p>"+
+	  "Description of project </p></div>");
+	counter++;
 	}
-	else {
+	else if(counter % 2 == 1) {
 		$(".project-description").fadeOut();
+		counter++;
+	}
+	else if (counter %2 == 0) {
+		$(".project-description").show();
+		counter++;
+
 	}
 
 }
